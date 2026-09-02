@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #183a37;
+  --color-earth: #8b5e3c;
+  --color-sand: #e8dcc8;
+  --color-off-white: #f8f6f0;
+  --color-slate: #46535c;
+  --color-terracotta: #c96b4b;
+}
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #183a37;
+  background: #f8f6f0;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f8f6f0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #c96b4b;
+  outline-offset: 3px;
+}
