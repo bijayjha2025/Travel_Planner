@@ -1,6 +1,4 @@
 import { Navbar } from './components/layout/navbar.jsx'
-import './App.css'
-
 function App() {
 
   return (
