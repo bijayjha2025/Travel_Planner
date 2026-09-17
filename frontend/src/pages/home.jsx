@@ -1,10 +1,9 @@
-function Home(){
+import HeroSection from '../components/layout/herosection'
 
-    return(
-        <p>Okay</p>
-    )
-
+export default function Home() {
+  return (
+    <>
+    <HeroSection />
+    </>
+  )
 }
-
-
-export default Home
