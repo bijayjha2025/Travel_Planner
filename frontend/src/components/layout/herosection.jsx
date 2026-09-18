@@ -1,6 +1,7 @@
 import BackgroundImage from '../../assets/BackgroundImage.png'
 import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
+import Destination from '../../pages/destination'
 
 function HeroSection() {
     
@@ -22,6 +23,21 @@ function HeroSection() {
  </motion.p>
       
     </div>
+
+    <motion.div
+     initial={{
+      opacity: 0, y: 30,
+     }}
+    
+     animate={{
+      opacity: 1, y: 0,
+     }}
+    
+     transition={{
+      duration: 0.8, delay: 0.35,
+     }} className=" mt-4 md:mt-0 ">
+     <Destination />
+    </motion.div>
    </div>
    </div>
   </section>
