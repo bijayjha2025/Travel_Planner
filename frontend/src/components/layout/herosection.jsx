@@ -6,13 +6,13 @@ function HeroSection() {
  const reduce = useReducedMotion()
     
  return(
-  <section className="relative min-h-[650px] sm:min-h-[700px] md:min-h-[750px] lg:min-h-[850px] flex flex-col justify-center bg-forest text-off-white overflow-hidden">
+  <section className="relative -mt-20 min-h-[650px] sm:min-h-[700px] md:min-h-[750px] lg:min-h-[850px] flex flex-col justify-center bg-forest text-off-white overflow-hidden">
    
    <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${BackgroundImage}')` }} />
     
     <div className="absolute inset-0 bg-gradient-to-r from-forest/85 via-forest/80 to-transparent" />
 
-    <div className="relative z-10 w-full max-w-[1500px] mx-auto px-6 pt-14 lg:px-12 pb-4">
+    <div className="relative z-10 w-full max-w-[1500px] mx-auto px-6 pt-32 lg:px-12 pb-4">
 
     <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
 

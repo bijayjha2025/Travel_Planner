@@ -1,7 +1,7 @@
 import { Navbar } from './components/layout/navbar.jsx'
 import  Home  from './pages/home.jsx'
 import Planner from './pages/planner.jsx'
-import Login from './pages/login.jsx'
+import Authpage from './pages/Authpage.jsx'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -16,7 +16,7 @@ function App() {
      <Routes>
        <Route path='/' element={<Home />} />
        <Route path='/planner' element={<Planner />} />
-       <Route path='/login' element={<Login />} />
+       <Route path='/login' element={<Authpage />} />
      </Routes>
     </div>
     </BrowserRouter>
