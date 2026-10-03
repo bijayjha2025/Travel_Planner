@@ -15,7 +15,7 @@ const navLinks = [
  { name: 'Responsible Travel', href: '#responsible-travel' }
 ]
 
-export const Navbar = () => {
+export const Navbar = ({ overHero = true }) => {
  const [isOpen, setIsOpen] = useState(false)
  const [scrolled, setScrolled] = useState(false)
  
@@ -39,20 +39,21 @@ export const Navbar = () => {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const solid = scrolled || isOpen || !overHero
   
   return(
     <>
-     <nav className={`sticky top-0 z-50 bg-off-white-90 backdrop-blur-md border-b border-sand transition-shadow duration-300 ${
-        scrolled ? 'shadow-[0_6px_20px_-12px_rgba(0,0,0,0.35)]': '' }`}>
+     <nav className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ${ solid ? 'border-sand bg-off-white-90 backdrop-blur-md shadow-[0_6px_20px_-12px_rgba(0,0,0,0.35)]' : 'border-transparent bg-transparent' }`} >
       <div className='max-w-7xl mx-auto px-6 h-20 flex items-center justify-between'>
 
-       <a href='/' className='flex items-center gap-2.5 text-forest z-50'>
-       <Mark className='h-7 w-8 text-forest' />
+       <a href='/' className={`flex items-center gap-2.5 transition-colors duration-300 ${solid ? 'text-forest' : 'text-off-white'}`}>
+       <Mark className='h-7 w-8' />
       <span className='font-serif text-2xl leading-none'>NEPAL</span></a>
 
        <div className='hidden md:flex items-center gap-8'>
         {navLinks.map((link) => (
-         <a key={link.name} href={link.href} className="group relative py-1 text-sm font-medium text-slateText transition-colors hover:text-forest">{link.name}
+         <a key={link.name} href={link.href} className= {`group relative py-1 text-sm font-medium transition-colors ${ solid ? 'text-slateText hover:text-forest' : 'text-off-white/85 hover:text-off-white'}`}>{link.name}
          
          <svg aria-hidden="true" viewBox="0 0 100 6" preserveAspectRatio="none" className="absolute -bottom-1 left-0 h-[6px] w-full origin-left scale-x-0 text-terracotta transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100" >
           <path d="M0 3 Q 12.5 0, 25 3 T 50 3 T 75 3 T 100 3" fill="none" stroke="currentColor" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
@@ -62,8 +63,8 @@ export const Navbar = () => {
        </div>
 
       <div className='hidden md:flex items-center gap-5'>
-       <a href='/login' className='text-sm font-serif font-medium text-slateText hover:text-forest transition-colors'>Sign In</a>
-       <a href='/planner' className=' font-serif bg-forest text-off-white px-5 py-2.5 rounded-md text-sm font-medium hover:bg-forest-light transition-colors'>Plan My Journey</a>
+       <a href='/login' className={`text-sm font-medium transition-colors ${ solid ? 'text-slateText hover:text-forest' : 'text-off-white/85 hover:text-off-white'}`}>Sign In</a>
+       <a href='/planner' className={`rounded-md px-5 py-2.5 text-sm font-medium transition-colors ${ solid ? 'bg-forest text-off-white hover:bg-forest-light' : 'bg-sand text-forest hover:bg-off-white'}`}>Plan My Journey</a>
       </div>
      
       <button onClick={() => setIsOpen(!isOpen)} className="z-50 -mr-2 rounded-lg p-2 text-forest transition-colors hover:bg-sand/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest md:hidden" aria-label={isOpen ? 'Close menu' : 'Open menu'}aria-expanded={isOpen} aria-controls="mobile-menu" >
