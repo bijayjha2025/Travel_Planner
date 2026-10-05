@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import { Menu, X, User } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Mark = ({ className = '' }) => (
 <svg viewBox="0 0 32 28" className={className} fill="none" aria-hidden="true">
@@ -9,10 +10,10 @@ const Mark = ({ className = '' }) => (
 )
 
 const navLinks = [
- { name: 'Destinations', href: '#destinations' },
- { name: 'Experiences', href: '#experiences' },
- { name: 'Hidden Gems', href: '#hidden-gems' },
- { name: 'Responsible Travel', href: '#responsible-travel' }
+ { name: 'Destinations', to: { pathname: '/', hash: '#destinations' } },
+ { name: 'Experiences', to: { pathname: '/', hash: '#experiences' } },
+ { name: 'Hidden Gems', to: { pathname: '/', hash: '#hidden-gems' } },
+ { name: 'Responsible Travel', to: { pathname: '/', hash: '#responsible-travel' } },
 ]
 
 export const Navbar = ({ overHero = true }) => {
@@ -47,24 +48,24 @@ export const Navbar = ({ overHero = true }) => {
      <nav className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ${ solid ? 'border-sand bg-off-white-90 backdrop-blur-md shadow-[0_6px_20px_-12px_rgba(0,0,0,0.35)]' : 'border-transparent bg-transparent' }`} >
       <div className='max-w-7xl mx-auto px-6 h-20 flex items-center justify-between'>
 
-       <a href='/' className={`flex items-center gap-2.5 transition-colors duration-300 ${solid ? 'text-forest' : 'text-off-white'}`}>
+       <Link to='/' className={`flex items-center gap-2.5 transition-colors duration-300 ${solid ? 'text-forest' : 'text-off-white'}`}>
        <Mark className='h-7 w-8' />
-      <span className='font-serif text-2xl leading-none'>NEPAL</span></a>
+      <span className='font-serif text-2xl leading-none'>NEPAL</span></Link>
 
        <div className='hidden md:flex items-center gap-8'>
         {navLinks.map((link) => (
-         <a key={link.name} href={link.href} className= {`group relative py-1 text-sm font-medium transition-colors ${ solid ? 'text-slateText hover:text-forest' : 'text-off-white/85 hover:text-off-white'}`}>{link.name}
+         <Link key={link.name} to={link.to} className= {`group relative py-1 text-sm font-medium transition-colors ${ solid ? 'text-slateText hover:text-forest' : 'text-off-white/85 hover:text-off-white'}`}>{link.name}
          
          <svg aria-hidden="true" viewBox="0 0 100 6" preserveAspectRatio="none" className="absolute -bottom-1 left-0 h-[6px] w-full origin-left scale-x-0 text-terracotta transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100" >
           <path d="M0 3 Q 12.5 0, 25 3 T 50 3 T 75 3 T 100 3" fill="none" stroke="currentColor" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
          </svg>
-        </a>
+        </Link>
         ))}
        </div>
 
       <div className='hidden md:flex items-center gap-5'>
-       <a href='/login' className={`text-sm font-medium transition-colors ${ solid ? 'text-slateText hover:text-forest' : 'text-off-white/85 hover:text-off-white'}`}>Sign In</a>
-       <a href='/planner' className={`rounded-md px-5 py-2.5 text-sm font-medium transition-colors ${ solid ? 'bg-forest text-off-white hover:bg-forest-light' : 'bg-sand text-forest hover:bg-off-white'}`}>Plan My Journey</a>
+       <Link to='/login' className={`text-sm font-medium transition-colors ${ solid ? 'text-slateText hover:text-forest' : 'text-off-white/85 hover:text-off-white'}`}>Sign In</Link>
+       <Link to='/planner' className={`rounded-md px-5 py-2.5 text-sm font-medium transition-colors ${ solid ? 'bg-forest text-off-white hover:bg-forest-light' : 'bg-sand text-forest hover:bg-off-white'}`}>Plan My Journey</Link>
       </div>
      
       <button onClick={() => setIsOpen(!isOpen)} className="z-50 -mr-2 rounded-lg p-2 text-forest transition-colors hover:bg-sand/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest md:hidden" aria-label={isOpen ? 'Close menu' : 'Open menu'}aria-expanded={isOpen} aria-controls="mobile-menu" >
@@ -80,20 +81,20 @@ export const Navbar = ({ overHero = true }) => {
       
       <div className='flex flex-col'>
       {navLinks.map((link) => (
-      <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="flex items-baseline justify-between gap-4 border-b border-sand/60 px-1 py-4 transition-colors hover:text-forest active:bg-sand/20">
+      <Link key={link.name} to={link.to} onClick={() => setIsOpen(false)} className="flex items-baseline justify-between gap-4 border-b border-sand/60 px-1 py-4 transition-colors hover:text-forest active:bg-sand/20">
        <span className="font-serif text-xl text-slateText">{link.name}</span>
        <span className="font-deva text-sm text-slateText/55">{link.native}</span>
-      </a>
+      </Link>
      ))}
      </div>
 
      <div className='flex flex-col gap-4'>
-      <a href='/login' onClick={() => setIsOpen(false)} className='flex items-center gap-3 px-1 py-2 text-slateText hover:text-forest font-serif font-medium text-base'>
+      <Link to='/login' onClick={() => setIsOpen(false)} className='flex items-center gap-3 px-1 py-2 text-slateText hover:text-forest font-serif font-medium text-base'>
        <User className='w-5 h-5 text-terracotta' />
        <span>Sign In</span>
-      </a>
+      </Link>
 
-      <a href='/planner' onClick={() => setIsOpen(false)} className="rounded-lg bg-forest px-6 py-3.5 text-center text-base font-medium text-off-white shadow-md transition-colors hover:bg-forest-light">Plan My Journey</a>
+      <Link to='/planner' onClick={() => setIsOpen(false)} className="rounded-lg bg-forest px-6 py-3.5 text-center text-base font-medium text-off-white shadow-md transition-colors hover:bg-forest-light">Plan My Journey</Link>
 
       <p className="pt-1 text-center font-deva text-sm text-slateText/60">नमस्ते, welcome.</p>
      </div>

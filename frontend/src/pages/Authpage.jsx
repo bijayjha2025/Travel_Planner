@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowLeft, ArrowUpRight, Compass, Eye, EyeOff, Lock, Mail, MapPin, User } from 'lucide-react'
 import BackgroundImage from '../assets/BackgroundImage.png'
@@ -95,10 +96,9 @@ function AuthPage() {
 
       <div className="relative z-10 flex w-full flex-col justify-between px-6 py-6 sm:px-8 lg:px-12 lg:py-8">
        <div className="flex items-center justify-between">
-       
-
-        <a href="/" className="hidden items-center gap-1.5 rounded-full border border-off-white/15 bg-forest/20 px-3 py-1.5 text-xs text-off-white/80 backdrop-blur-sm transition hover:border-sand/40 hover:text-off-white sm:flex">
-         <ArrowLeft className="h-3.5 w-3.5" />Back home</a>
+  
+        <Link to="/" className="hidden items-center gap-1.5 rounded-full border border-off-white/15 bg-forest/20 px-3 py-1.5 text-xs text-off-white/80 backdrop-blur-sm transition hover:border-sand/40 hover:text-off-white sm:flex">
+         <ArrowLeft className="h-3.5 w-3.5" />Back home</Link>
        </div>
        
        <div className="relative max-w-xl pb-4 pt-24 lg:pb-10 lg:pt-0">

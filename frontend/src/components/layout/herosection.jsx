@@ -6,7 +6,7 @@ function HeroSection() {
  const reduce = useReducedMotion()
     
  return(
-  <section className="relative -mt-20 min-h-[650px] sm:min-h-[700px] md:min-h-[750px] lg:min-h-[850px] flex flex-col justify-center bg-forest text-off-white overflow-hidden">
+  <section id='experiences' className="relative -mt-20 min-h-[650px] sm:min-h-[700px] md:min-h-[750px] lg:min-h-[850px] flex flex-col justify-center bg-forest text-off-white overflow-hidden">
    
    <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${BackgroundImage}')` }} />
     
@@ -37,7 +37,7 @@ function HeroSection() {
      </div>
     </div>
 
-    <div className="mt-2 md:mt-0">
+    <div id="destinations" className="mt-2 md:mt-0">
    <Destination />
    </div>
    </div>
