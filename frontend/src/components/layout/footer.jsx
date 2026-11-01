@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { SocialIcon } from 'react-social-icons';
@@ -6,16 +7,16 @@ import NavbarBackground from '../../assets/NavbarBackground.jpg'
 
 const exploreLinks = [
   { label: 'Plan a Journey', href: '/planner' },
-  { label: 'Discover Destinations', href: '#destinations' },
-  { label: 'Find Hidden Gems', href: '#hidden-gems' },
-  { label: 'Travel Stories', href: '#' },
+  { label: 'Discover Destinations', href: '/#destinations' },
+  { label: 'Find Hidden Gems', href: '/#hidden-gems' },
+  { label: 'Travel Stories', href: '/#responsible-travel' },
 ]
 
 const companyLinks = [
-  { label: 'About Us', href: '#' },
-  { label: 'How It Works', href: '#' },
-  { label: 'Our Vision', href: '#' },
-  { label: 'Contact Us', href: '#' },
+  { label: 'About Us', href: '/#our-story' },
+  { label: 'How It Works', href: '/#how-it-works' },
+  { label: 'Our Vision', href: '/#our-vision' },
+  { label: 'Contact Us', href: '/#contact' },
 ]
 
 const socials = [
@@ -105,16 +106,16 @@ function Footer() {
    <div className="absolute inset-0 bg-gradient-to-b from-[#132227]/40 via-[#0e1c21]/80 to-[#0b1417]" />
   </div>
   
-  <section className="relative mx-auto grid max-w-[1500px] items-center gap-12 px-6 py-20 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-20 lg:px-12 lg:py-28">
+  <section id="responsible-travel" className="relative mx-auto grid max-w-[1500px] items-center gap-12 px-6 py-20 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-20 lg:px-12 lg:py-28">
    <div>
     <h2 className="font-serif text-3xl leading-tight sm:text-4xl">Tell us how many days you have.</h2>
     <p className="mt-5 max-w-md text-base leading-7 text-[#f5efe2]/65">We'll suggest a route, and tell you where it's worth slowing down.</p>
-    <a href="/planner" className="mt-8 inline-flex items-center gap-2 rounded-md bg-[#d8c39a] px-5 py-3 text-sm font-semibold text-[#173326] transition-colors hover:bg-[#f5efe2] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c39a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e171b]">Start planning</a>
+    <Link to="/planner" className="mt-8 inline-flex items-center gap-2 rounded-md bg-[#d8c39a] px-5 py-3 text-sm font-semibold text-[#173326] transition-colors hover:bg-[#f5efe2] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d8c39a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0e171b]">Start planning</Link>
    </div>
    <RouteMap reduce={reduce} />
    </section>
  
-   <section className="relative border-t border-[#f5efe2]/10">
+   <section id="hidden-gems" className="relative border-t border-[#f5efe2]/10">
    <div className="mx-auto max-w-[1500px] px-6 py-14 lg:px-12">
     <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
     <div>
@@ -156,8 +157,8 @@ function Footer() {
    <div className="mt-14 flex flex-col gap-4 border-t border-[#f5efe2]/10 pt-6 text-xs text-[#f5efe2]/45 sm:flex-row sm:items-center sm:justify-between">
    <p>© {new Date().getFullYear()} Nepal. Travel wise.</p>
    <div className="flex items-center gap-6">
-    <a href="#" className="transition-colors hover:text-[#d8c39a]">Privacy</a>
-    <a href="#" className="transition-colors hover:text-[#d8c39a]">Terms</a>
+    <Link to="/privacy" className="transition-colors hover:text-[#d8c39a]">Privacy</Link>
+    <Link to="/terms" className="transition-colors hover:text-[#d8c39a]">Terms</Link>
    </div>
   </div>
   </div>

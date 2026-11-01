@@ -5,6 +5,7 @@ import mundumtrek from '../assets/destinations/MundumTrek.jpg'
 import cholungpark from '../assets/destinations/CholungPark.jpg'
 import namastejharna from '../assets/destinations/namasteJharna.jpg'
 import tinjure from '../assets/destinations/Tinjure.jpg'
+import kanyam from '../assets/destinations/Kanyam.jpg'
 
 
 export const destinations = [
@@ -16,7 +17,7 @@ export const destinations = [
         type: "Nature",
         duration: "2 Days",
         score: 88,
-        image: '',
+        image: kanyam,
         description:'A peaceful hill station surrounded by green tea gardens and cool mountain air. Kanyam is a great place to slow down, enjoy the scenery, take photos, and experience the quiet beauty of Ilam.',
         isGem: true,
     },
