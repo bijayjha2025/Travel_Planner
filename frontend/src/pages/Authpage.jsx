@@ -1,15 +1,8 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowLeft, ArrowUpRight, Compass, Eye, EyeOff, Lock, Mail, MapPin, User } from 'lucide-react'
 import BackgroundImage from '../assets/BackgroundImage.png'
-
-const Mark = ({ className = '' }) => (
- <svg viewBox="0 0 32 28" className={className} fill="none" aria-hidden="true">
-  <path d="M2 25 L12 8 L17 16 L21 11 L30 25 Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-  <circle cx="25" cy="6" r="2.5" className="fill-terracotta" />
- </svg>
-)
 
 const GoogleIcon = (props) => (
  <svg viewBox="0 0 48 48" {...props} aria-hidden="true">
@@ -20,8 +13,28 @@ const GoogleIcon = (props) => (
  </svg>
 )
 
+function FloatingDetails({ reduce }) {
+ const details = [
+  { left: '14%', top: '22%', size: 5, delay: 0 },
+  { left: '42%', top: '15%', size: 3, delay: 1.2 },
+  { left: '73%', top: '66%', size: 4, delay: 2.1 },
+  { left: '84%', top: '38%', size: 2, delay: 0.7 },
+  { left: '26%', top: '72%', size: 3, delay: 1.8 },
+ ]
+
+ return (
+  <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+   {details.map((detail) => (
+    <motion.span key={`${detail.left}-${detail.top}`} className="absolute rounded-full bg-sand/70" style={{ left: detail.left, top: detail.top, width: detail.size, height: detail.size }} animate={reduce ? {} : { y: [0, -12, 0], opacity: [0.25, 0.8, 0.25] }} transition={{ duration: 4 + detail.delay, delay: detail.delay, repeat: Infinity, ease: 'easeInOut' }} />
+   ))}
+  </div>
+ )
+}
+
+
 const PasswordField = ({ id, label, value, onChange, autoComplete, placeholder }) => {
  const [show, setShow] = useState(false)
+ const strength = Math.min(4, [value.length >=8, /[A-Z]/.test(value), /\d/.test(value), /[^A-Za-z0-9]/.test(value),].filter(Boolean).length)
  
  return (
   <div className="group">
@@ -33,6 +46,15 @@ const PasswordField = ({ id, label, value, onChange, autoComplete, placeholder }
     <input id={id} type={show ? 'text' : 'password'} required value={value} onChange={onChange} autoComplete={autoComplete} placeholder={placeholder} minLength={8} className="w-full rounded-2xl border border-sand/90 bg-off-white/70 py-3.5 pl-11 pr-12 text-sm text-forest outline-none backdrop-blur-sm transition-all placeholder:text-slateText/30 hover:border-sand focus:border-terracotta focus:bg-off-white focus:shadow-[0_0_0_4px_rgba(184,88,65,0.08)]" />
     <button type="button" onClick={() => setShow((s) => !s)} aria-label={show ? 'Hide password' : 'Show password'} className="absolute right-4 top-1/2 -translate-y-1/2 text-slateText/35 transition-colors hover:text-forest">{show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button>
    </div>
+
+   {value.length > 0 && (
+    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="mt-2 flex items-center gap-2">
+     <div className="flex flex-1 gap-1">
+      {[1, 2, 3, 4].map((level) => <span key={level} className={`h-1 flex-1 rounded-full transition-colors ${level <= strength ? strength < 2 ? 'bg-terracotta' : strength < 4 ? 'bg-sand' : 'bg-forest' : 'bg-slateText/10'}`} />)}
+     </div>
+     <span className="text-[9px] uppercase tracking-[0.14em] text-slateText/40">{strength < 2 ? 'keep going' : strength < 4 ? 'getting there' : 'solid choice'}</span>
+    </motion.div>
+   )}
   </div>
   )
 }
@@ -57,7 +79,21 @@ function AuthPage() {
   const reduce = useReducedMotion()
   const [mode, setMode] = useState('signin')
   const [status, setStatus] = useState('idle')
+  const [pointer, setPointer] = useState({ x: 0, y: 0 })
   const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', agree: false, })
+
+  useEffect(() => {
+    if(reduce) return undefined
+    const handlePointerMove = (event) => {
+      setPointer({
+       x: (event.clientX / window.innerWidth - 0.5) * 2,
+      y: (event.clientY / window.innerHeight - 0.5) * 2,
+    })
+    }
+    window.addEventListener('pointermove', handlePointerMove)
+     return () => window.removeEventListener('pointermove', handlePointerMove)
+    }, [reduce])
+
 
   const update = (key) => (e) =>
     setForm((f) => ({ ...f, [key]: e.target.type === 'checkbox' ? e.target.checked : e.target.value, }))
@@ -68,12 +104,31 @@ function AuthPage() {
 
   const mismatch = mode === 'signup' && form.confirm.length > 0 && form.confirm !== form.password
 
+  const navigate = useNavigate()
+
+  const completedFields = [form.email, form.password, mode == 'signup' ? form.name : true, mode == 'signup' ? form.confirm && !mismatch && form.agree : true].filter(Boolean).length
+
+  const formProgress = (completedFields / (mode === 'signup' ? 4 : 2)) * 100
+
   const handleSubmit = (e) => { e.preventDefault()
     if (mode === 'signup' && form.password !== form.confirm) return
 
     setStatus('loading')
     
-    setTimeout(() => setStatus('idle'), 1200)
+    setTimeout(() => {
+      const user = {
+        name: form.name || form.email.split('@')[0] || 'Himesh',
+        email: form.email,
+        loggedInAt: new Date().toISOString(),
+      }
+      localStorage.setItem('koshi_user', JSON.stringify(user))
+      window.dispatchEvent(new Event('koshi_auth_change'))
+      setStatus('idle')
+
+      const searchParams = new URLSearchParams(window.location.search)
+      const redirect = searchParams.get('redirect') || '/community'
+      navigate(redirect)
+     }, 800)
   }
 
   return (
