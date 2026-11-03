@@ -6,28 +6,25 @@ import Authpage from './pages/Authpage.jsx'
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 
+import Community from './pages/community.jsx'
+import Explore from './pages/explore.jsx'
+import Recommendation from './pages/recommendation.jsx'
+import Trip from './pages/trip.jsx'
+import Destination from './pages/destination.jsx'
+
+
 function ScrollToTop() {
-  const { pathname, hash } = useLocation()
+  const { pathname, search } = useLocation()
 
   useEffect(() => {
-    if (hash) {
-      const id = hash.replace('#', '')
-      const target = document.getElementById(id)
-
-      if (target) {
-        window.scrollTo({ top: target.offsetTop - 88, left: 0, behavior: 'smooth' })
-        return
-      }
-    }
-
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-  }, [pathname, hash])
+  }, [pathname, search])
 
   return null
 }
 
 
-function App() {
+export default function App() {
 
   return (
     <BrowserRouter>
@@ -37,13 +34,18 @@ function App() {
 
      <Routes>
        <Route path='/' element={<Home />} />
-       <Route path='/planner' element={<Planner />} />
+       <Route path='/home' element={<Home />} />
+       <Route path='/community' element={<Community />} />
+       <Route path='/explore' element={<Explore />} />
+       <Route path='/recommendation' element={<Recommendation />} />
+       <Route path='/trip' element={<Trip />} />
+       <Route path='/destination' element={<Destination />} />
+       <Route path='/planner' element={<Trip />} />
        <Route path='/login' element={<Authpage />} />
-       <Route path='*' element={<Navigate to='/' replace />} />
+       <Route path='/auth' element={<Authpage />} />
      </Routes>
     </div>
     </BrowserRouter>
   )
 }
 
-export default App
