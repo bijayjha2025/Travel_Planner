@@ -4,6 +4,7 @@ import { MapPin, ArrowUpRight, ShieldCheck, Mountain, ChevronRight, Sparkles } f
 import { destinations } from '../data/destinations.js'
 import Footer from '../components/layout/footer.jsx'
 import BackgroundImage from '../assets/BackgroundImage.png'
+import InteractiveMap from '../components/map.jsx'
 
 const FEATURED_TRIPS = [
   {
@@ -74,9 +75,95 @@ export default function Trip(){
   </div>
  </section>
 
+ <main className="max-w-[1500px] mx-auto px-6 lg:px-12 py-12">
 
+  <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-10'>
+   {FEATURED_TRIPS.map(trip => {
+    const isSel = selectedTrip.id === trip.id
+    return(
+      <div key={trip.id} onClick={() => setSelectedTrip(trip)} className={`rounded-[3px] p-6 cursor-pointer transition-all flex flex-col justify-between space-y-4 border ${
+        isSel ? 'bg-off-white border-terracotta shadow-[0_4px_16px_rgba(0,0,0,0.15)] ring-2 ring-terracotta/40' : 'bg-white border-sand hover:border-forest/90'}`}>
 
+       <div>
+        <div className='flex items-center justify-between text-xs text-slateText font-sans mb-2'>
+         <span className='bg-sand/60 text-forest px-2.5 py-0.5 rounded-xs font-semibold'>{trip.duration}</span>
+         <span className='text-terracotta font-medium'>{trip.vibe}</span>
+        </div>
 
+        <h3 className="font-serif text-xl font-bold text-forest leading-snug">{trip.title}</h3>
+        <p className="text-xs text-slateText mt-2 leading-relaxed font-sans">{trip.description}</p>
+      </div>
+
+      <div className="pt-3 border-t border-sand/60 flex items-center justify-between">
+       <span className="text-xs font-serif font-bold text-forest">Est. NPR {trip.estimatedCost.toLocaleString()}</span>
+       <span className={`text-xs font-semibold flex items-center gap-1 ${isSel ? 'text-terracotta' : 'text-slateText'}`}>
+        {isSel ? 'Active Route' : 'Select'} <ChevronRight className="w-3.5 h-3.5" /></span>
+      </div>
+     </div>
+    )
+    })}
+   </div>
+
+<div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+ <div className="lg:col-span-7 space-y-6">
+ <div className="bg-white rounded-[3px] p-6 border border-sand shadow-xs space-y-6">
+ <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sand pb-4">
+  <div>
+   <h2 className="font-serif text-2xl font-bold text-forest">{selectedTrip.title}</h2>
+   <p className="text-xs text-slateText mt-1 font-sans">{selectedTrip.subtitle}</p>
   </div>
- )
+
+   <button onClick={() => { const query = selectedTrip.destIds.join(',')
+   navigate(`/planner?destinations=${query}`) }} className="rounded-md bg-forest px-5 py-2.5 text-xs font-medium text-off-white hover:bg-forest-light transition-colors flex items-center gap-1.5 shrink-0">Customize in Planner <ArrowUpRight className="w-4 h-4" /></button>
+  </div>
+
+  <div>
+   <h4 className="text-xs font-semibold text-slateText uppercase tracking-wider mb-2 font-sans">Route Highlights</h4>
+   <div className="flex flex-wrap gap-2">
+    {selectedTrip.highlights.map((h, i) => (
+    <span key={i} className="text-xs bg-sand/40 text-forest font-medium px-3 py-1 rounded-xs flex items-center gap-1.5">
+     <Sparkles className="w-3.5 h-3.5 text-terracotta" /> {h}
+    </span>
+   ))}
+   </div>
+  </div>
+  
+  <div className="space-y-4 pt-2">
+   <h4 className="text-xs font-semibold text-slateText uppercase tracking-wider font-sans">Included Locations ({tripDestinations.length} Stops)</h4>
+    
+   <div className="space-y-4">
+   {tripDestinations.map((dest, idx) => (
+    <div key={dest.id} className="bg-off-white rounded-[3px] p-4 border border-sand shadow-xs flex gap-4 items-start">
+     <img src={dest.image} alt={dest.title} className="w-24 h-24 rounded-xs object-cover shrink-0" />
+                      
+    <div className="space-y-1 flex-1 font-sans">
+     <div className="flex items-center justify-between">
+      <h5 className="font-serif text-lg font-bold text-forest">{dest.title}</h5>
+      <span className="text-[11px] bg-sand/80 text-forest px-2 py-0.5 rounded-xs">Stop {idx + 1}</span>
+     </div>
+
+     <p className="text-xs text-slateText flex items-center gap-1"><MapPin className="w-3 h-3 text-terracotta shrink-0" />{dest.location} • {dest.elevation} m</p>
+
+     <p className="text-xs text-slateText/80 leading-relaxed line-clamp-2 pt-1">{dest.description}</p>
+    </div>
+   </div>
+  ))}
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <div className="lg:col-span-5 space-y-6">
+   <div className="bg-white rounded-[3px] p-4 border border-sand shadow-xs space-y-3">
+    <h3 className="font-serif text-lg text-forest font-bold px-2">Itinerary Route Map</h3>
+    <InteractiveMap destinations={destinations} selectedIds={selectedTrip.destIds} height="460px" />
+   </div>
+  </div>
+  
+  </div>
+ </main>
+
+ <Footer />
+ </div>
+)
 }
