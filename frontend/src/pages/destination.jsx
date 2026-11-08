@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { destinations } from '../data/destinations';
 import { MapPin, ShieldCheck, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -20,6 +21,8 @@ const SIZES = {
   md: { w: 304, h: 408, spread: 0.78 },
   lg: { w: 328, h: 430, spread: 1 },
 };
+
+const MotionLink = motion(Link);
 
 const getBreakpoint = () => {
   if (typeof window === "undefined") return "lg";
@@ -54,7 +57,7 @@ function DestinationCard({ destination, position, size, entered, reduce, onSelec
  
 
 return (
-<motion.a href={`/planner?destination=${destination.id}`} onClick={(e) => {if (!isActive) { e.preventDefault(); onSelect(); } }} aria-label={isActive ? `Plan a trip to ${destination.title}` : `Show ${destination.title}`} draggable={false} className="absolute left-1/2 top-1/2 block focus:outline-none focus-visible:ring-2 focus-visible:ring-sand focus-visible:ring-offset-2 focus-visible:ring-offset-forest" style={{ width: size.w, height: size.h, marginLeft: -size.w / 2, marginTop: -size.h / 2, zIndex: slot.zIndex, }}
+<MotionLink to={`/planner?destination=${destination.id}`} onClick={(e) => {if (!isActive) { e.preventDefault(); onSelect(); } }} aria-label={isActive ? `Plan a trip to ${destination.title}` : `Show ${destination.title}`} draggable={false} className="absolute left-1/2 top-1/2 block focus:outline-none focus-visible:ring-2 focus-visible:ring-sand focus-visible:ring-offset-2 focus-visible:ring-offset-forest" style={{ width: size.w, height: size.h, marginLeft: -size.w / 2, marginTop: -size.h / 2, zIndex: slot.zIndex, }}
 
 initial={reduce ? false : { x: 0, y: 0, rotate: 0, scale: 0.5, opacity: 0 }} animate={{ x: slot.x * size.spread, y: slot.y, rotate: slot.rotate, scale: slot.scale, opacity: slot.opacity, }}
 
@@ -92,7 +95,7 @@ transition={ reduce ? { duration: 0 } : { type: "spring", stiffness: 110, dampin
    </div>
    </div>
    </div>
-  </motion.a>
+  </MotionLink>
   );
 }
  

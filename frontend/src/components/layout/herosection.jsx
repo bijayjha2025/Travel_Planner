@@ -1,5 +1,6 @@
 import BackgroundImage from '../../assets/BackgroundImage.png'
 import { motion, useReducedMotion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import Destination from '../../pages/destination'
 
 function HeroSection() {
@@ -22,7 +23,7 @@ function HeroSection() {
          Tell us what kind of trip you have in mind. Your time, budget, interests, and how much adventure you want. We'll put it together into a journey that actually works for you.
        </p>
 
-       <a href="/planner" className="mt-7 inline-flex items-center rounded-md bg-sand px-5 py-3 text-sm font-semibold text-forest transition-colors hover:bg-off-white focus:outline-none focus-visible:ring-2 focus-visible:ring-sand focus-visible:ring-offset-2 focus-visible:ring-offset-forest" >Plan my journey</a>
+       <Link to="/planner" className="mt-7 inline-flex items-center rounded-md bg-sand px-5 py-3 text-sm font-semibold text-forest transition-colors hover:bg-off-white focus:outline-none focus-visible:ring-2 focus-visible:ring-sand focus-visible:ring-offset-2 focus-visible:ring-offset-forest" >Plan my journey</Link>
     </div>
 
     <div className="relative hidden -rotate-2 pb-10 pr-6 text-sand md:block lg:mr-16">

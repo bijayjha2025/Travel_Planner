@@ -7,9 +7,9 @@ import NavbarBackground from '../../assets/NavbarBackground.jpg'
 
 const exploreLinks = [
   { label: 'Plan a Journey', href: '/planner' },
-  { label: 'Discover Destinations', href: '/#destinations' },
-  { label: 'Find Hidden Gems', href: '/#hidden-gems' },
-  { label: 'Travel Stories', href: '/#responsible-travel' },
+  { label: 'Discover Destinations', href: '/destination' },
+  { label: 'Find Hidden Gems', href: '/community' },
+  { label: 'Travel Stories', href: '/trip' },
 ]
 
 const companyLinks = [
@@ -174,7 +174,7 @@ return (
   <ul className="mt-5 space-y-3">
    {links.map((link) => (
     <li key={link.label}>
-     <a href={link.href} className="text-sm text-[#f5efe2]/55 underline decoration-transparent decoration-1 underline-offset-4 transition-colors hover:text-[#f5efe2] hover:decoration-[#d8c39a]">{link.label}</a>
+     <Link to={link.href} className="text-sm text-[#f5efe2]/55 underline decoration-transparent decoration-1 underline-offset-4 transition-colors hover:text-[#f5efe2] hover:decoration-[#d8c39a]">{link.label}</Link>
     </li>
     ))}
    </ul>

@@ -40,7 +40,7 @@ export default function App() {
        <Route path='/recommendation' element={<Recommendation />} />
        <Route path='/trip' element={<Trip />} />
        <Route path='/destination' element={<Destination />} />
-       <Route path='/planner' element={<Trip />} />
+       <Route path='/planner' element={<Planner />} />
        <Route path='/login' element={<Authpage />} />
        <Route path='/auth' element={<Authpage />} />
      </Routes>

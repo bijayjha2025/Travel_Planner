@@ -10,10 +10,11 @@ const Mark = ({ className = '' }) => (
 )
 
 const navLinks = [
- { name: 'Destinations', to: { pathname: '/', hash: '#destinations' } },
- { name: 'Experiences', to: { pathname: '/', hash: '#experiences' } },
- { name: 'Hidden Gems', to: { pathname: '/', hash: '#hidden-gems' } },
- { name: 'Responsible Travel', to: { pathname: '/', hash: '#responsible-travel' } },
+ { name: 'Destinations', to: '/destination' },
+ { name: 'Experiences', to: '/explore' },
+ { name: 'Hidden Gems', to: '/community' },
+ { name: 'Recommendations', to: '/recommendation' },
+ { name: 'Responsible Travel', to: '/trip' },
 ]
 
 export const Navbar = ({ overHero = true }) => {
