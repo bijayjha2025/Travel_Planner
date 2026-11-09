@@ -158,51 +158,51 @@ const handleFormSubmit = (e) => {
    alert("Please fill in all required fields.")
    return
   }
-}
 
-const newPost = {
- id: `post-${Date.now()}`,
- authorName: formData.authorName,
- authorTag: 'Verified Traveler',
- datePosted: 'Just now',
- placeTitle: formData.placeTitle,
- location: formData.location,
- category: formData.category,
- rating: parseInt(formData.rating) || 8,
- budgetSpent: parseInt(formData.budgetSpent) || 2000,
- duration: formData.duration,
- bestMonth: formData.bestMonth,
- elevation: formData.elevation,
- honestReview: formData.honestReview,
- pros: formData.pros,
- cons: formData.cons,
- imageUrl: formData.imageUrl,
- helpfulCount: 1,
- verified: true,
-}
+ const newPost = {
+  id: `post-${Date.now()}`,
+  authorName: formData.authorName,
+  authorTag: 'Verified Traveler',
+  datePosted: 'Just now',
+  placeTitle: formData.placeTitle,
+  location: formData.location,
+  category: formData.category,
+  rating: parseInt(formData.rating) || 8,
+  budgetSpent: parseInt(formData.budgetSpent) || 2000,
+  duration: formData.duration,
+  bestMonth: formData.bestMonth,
+  elevation: formData.elevation,
+  honestReview: formData.honestReview,
+  pros: formData.pros,
+  cons: formData.cons,
+  imageUrl: formData.imageUrl,
+  helpfulCount: 1,
+  verified: true,
+ }
 
-setPosts([newPost, ...posts])
-setFormSubmitted(true)
+ setPosts([newPost, ...posts])
+ setFormSubmitted(true)
 
-setTimeout(() => {
+ setTimeout(() => {
   setFormSubmitted(false)
   setActiveMode('view')
   setFormData({
-    authorName: '',
-    placeTitle: '',
-    location: '',
-    category: 'Nature & Tea Gardens',
-    rating: '9',
-    budgetSpent: '',
-    duration: '1 Day',
-    bestMonth: 'October to November',
-    elevation: '',
-    honestReview: '',
-    pros: '',
-    cons: '',
-    imageUrl: '',
+   authorName: '',
+   placeTitle: '',
+   location: '',
+   category: 'Nature & Tea Gardens',
+   rating: '9',
+   budgetSpent: '',
+   duration: '1 Day',
+   bestMonth: 'October to November',
+   elevation: '',
+   honestReview: '',
+   pros: '',
+   cons: '',
+   imageUrl: '',
   })
-}, 1500)
+ }, 1500)
+}
 
 return (
  <div className="min-h-screen bg-[#f8f6f0] text-forest font-sans">
