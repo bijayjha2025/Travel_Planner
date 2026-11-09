@@ -2,8 +2,9 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { destinations } from '../data/destinations'
 import BackgroundImage from '../assets/BackgroundImage.png'
-import { Search, Sparkles, PlusCircle, Grid, ListIcon, Compass } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { Search, Sparkles, PlusCircle, Grid, ListIcon, Compass, ShieldCheck, Heart, ArrowUpRight, MapPin, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Footer from '../components/layout/footer'
 
 export default function Explore(){
  const navigate = useNavigate()
@@ -175,22 +176,119 @@ return(
        </motion.div>
        )}
 
+       return(
+        <motion.div key={dest.id} onClick={() => setPreviewDest(dest)} initial={{ opacity: 0, y: 18, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.4, delay: Math.min(filtered.indexOf(dest) * 0.05, 0.35) }} className="relative flex flex-col rounded-[3px] bg-off-white p-2.5 pb-0 shadow-[0_2px_3px_rgba(0,0,0,0.25),0_24px_40px_-14px_rgba(0,0,0,0.65)] hover:scale-[1.02] transition-transform duration-300 cursor-pointer group">
 
+         {dest.isGem && (
+          <span aria-hidden="true" className="absolute -top-3 left-1/2 z-10 h-6 w-20 -translate-x-1/2 -rotate-3 bg-sand/85 shadow-xs"/>
+         )}
 
+         <div className='relative h-56 w-full overflow-hidden'>
+          <img src={dest.image} alt={dest.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span className="absolute left-2 top-2 rounded-sm bg-forest/80 px-2 py-1 text-xs font-medium text-sand backdrop-blur-sm">{dest.type}</span>
+          <span className="absolute right-2 top-2 flex items-center gap-1 rounded-sm bg-off-white/90 px-2 py-1 text-xs font-medium text-forest"><ShieldCheck className="h-3.5 w-3.5 text-terracotta" />{dest.score}</span>
+
+          <button onClick={(e) => toggleWishlist(dest.id, e)} className={`absolute bottom-2 right-2 p-1.5 rounded-sm backdrop-blur-sm transition-all ${ isWishlisted ? 'bg-terracotta text-off-white' : 'bg-off-white/80 text-slateText hover:bg-off-white'}`}>
+           <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-off-white' : ''}`} />
+          </button>
+         </div>
+
+         <div className='px-1.5 pb-3.5 pt-3'>
+         <p className="text-xs italic text-slateText/70">{dest.category}</p>
+          <div className="mt-0.5 flex items-start justify-between gap-2">
+           <h3 className="font-serif text-2xl leading-tight text-forest group-hover:text-terracotta transition-colors">{dest.title}</h3>
+           <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-terracotta" />
+          </div>
+          
+          <div className="mt-2 flex items-center justify-between gap-2 text-xs text-slateText">
+           <span className="flex min-w-0 items-center gap-1"><MapPin className="h-3 w-3 shrink-0 text-terracotta" />
+            <span className="truncate">{dest.location}</span>
+           </span>
+           <span className="shrink-0 font-medium">{dest.duration}</span>
+          </div>
+
+          <div className="mt-3 pt-2.5 border-t border-sand/60 flex items-center justify-between text-xs font-sans">
+           <span className="text-slateText/80">{dest.elevation} m alt</span>
+           <button onClick={(e) => { e.stopPropagation();navigate(`/planner?destination=${dest.id}`)}} className="font-semibold text-forest hover:text-terracotta underline decoration-terracotta/40 underline-offset-4">Plan My Journey →</button>
+          </div>
+         </div>
+        </motion.div>
+       )
      })}
      </div>
-
     )
-    
-  
   }
-
-
-
-
   </main>
 
+  <AnimatePresence>
+   {previewDest && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-forest/80 backdrop-blur-xs">
+    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="bg-off-white rounded-[3px] overflow-hidden max-w-2xl w-full border border-sand shadow-2xl relative p-3">
+     <button onClick={() => setPreviewDest(null)} className="absolute top-5 right-5 z-20 bg-forest text-off-white p-2 rounded-full hover:bg-forest-light transition-colors">
+      <X className="w-4 h-4" />
+     </button>
 
+     <div className="relative h-64 w-full overflow-hidden">
+      <img src={previewDest.image} alt={previewDest.title} className="w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-forest/80 via-transparent to-transparent" />
+
+      <div className="absolute bottom-4 left-6 right-6 text-off-white">
+       <span className="text-xs bg-terracotta px-2 py-0.5 rounded-sm font-semibold uppercase tracking-wider">{previewDest.type}</span>
+       <h2 className="font-serif text-3xl font-bold mt-1 text-off-white">{previewDest.title}</h2>
+       <p className="text-xs text-sand/80 flex items-center gap-1 mt-0.5">
+       <MapPin className="w-3.5 h-3.5 text-sand" /> {previewDest.location}</p>
+      </div>
+     </div>
+
+     <div className="p-6 space-y-4 max-h-[55vh] overflow-y-auto font-sans text-forest">
+      <p className="text-sm leading-relaxed">{previewDest.description}</p>
+      
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-3 rounded-[3px] border border-sand text-xs">
+      <div>
+       <span className="text-[10px] text-slateText/70 uppercase block">Elevation</span>
+       <strong className="text-forest text-sm font-serif">{previewDest.elevation} m</strong>
+       </div>
+       
+       <div>
+        <span className="text-[10px] text-slateText/70 uppercase block">Best Season</span>
+        <strong className="text-forest text-sm font-serif">{previewDest.bestSeason}</strong>
+       </div>
+       
+       <div>
+        <span className="text-[10px] text-slateText/70 uppercase block">Est. Daily Budget</span>
+        <strong className="text-terracotta text-sm font-serif">NPR {previewDest.costPerDay}</strong>
+       </div>
+      
+      <div>
+       <span className="text-[10px] text-slateText/70 uppercase block">Score</span>
+       <strong className="text-forest text-sm font-serif">{previewDest.score} / 100</strong>
+      </div>
+      </div>
+
+      <div>
+       <h4 className="text-xs font-semibold text-slateText uppercase tracking-wider mb-2">Key Experiences</h4>
+       <div className="flex flex-wrap gap-1.5">
+       {previewDest.activities?.map((act, idx) => (
+        <span key={idx} className="text-xs bg-sand/40 text-forest font-medium px-2.5 py-1 rounded-xs">• {act}</span>
+        ))}
+       </div>
+       </div>
+
+       <div className="pt-4 flex items-center justify-end gap-3 border-t border-sand">
+       <button onClick={() => setPreviewDest(null)} className="px-4 py-2 text-xs font-semibold text-slateText hover:text-forest"> Close</button>
+       <button onClick={() => {
+         const id = previewDest.id
+         setPreviewDest(null)
+         navigate(`/planner?destination=${id}`)
+        }} className="rounded-md bg-forest px-5 py-2.5 text-xs font-medium text-off-white hover:bg-forest-light transition-colors flex items-center gap-1.5">Plan Trip To This Place <ArrowUpRight className="w-4 h-4" />
+      </button>
+     </div>
+     </div>
+    </motion.div>
+    </div>
+   )}
+  </AnimatePresence>
+  <Footer />
  </div>
 )
 }
