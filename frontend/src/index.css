@@ -224,3 +224,48 @@ select:focus-visible {
   box-shadow: 0 12px 30px -24px rgba(24, 58, 55, 0.65);
   backdrop-filter: blur(8px);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-surface,
+  .page-surface::before {
+    animation: none;
+  }
+
+  .interactive-card,
+  .interactive-image,
+  .interactive-arrow {
+    transition: none;
+  }
+}
+
+@keyframes surfaceDrift {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 70%;
+  }
+}
+
+@keyframes ambientGlow {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(0.98);
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: translate3d(2%, 2%, 0) scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes cardSheen {
+  from {
+    background-position: 120% 0;
+  }
+
+  to {
+    background-position: -20% 100%;
+  }
+}

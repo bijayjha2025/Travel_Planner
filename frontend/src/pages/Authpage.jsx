@@ -38,10 +38,10 @@ const PasswordField = ({ id, label, value, onChange, autoComplete, placeholder }
  
  return (
   <div className="group">
-   <label htmlFor={id} className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-slateText/65">{label}</label>
+   <label htmlFor={id} className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-sand/80">{label}</label>
 
    <div className="relative">
-    <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slateText/35 transition-colors group-focus-within:text-terracotta" />
+    <Lock className="pointer-events-none absolute left-4 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-sand/45 transition-colors group-focus-within:text-sand" />
     
     <input id={id} type={show ? 'text' : 'password'} required value={value} onChange={onChange} autoComplete={autoComplete} placeholder={placeholder} minLength={8} className="w-full rounded-2xl border border-sand/90 bg-off-white/70 py-3.5 pl-11 pr-12 text-sm text-forest outline-none backdrop-blur-sm transition-all placeholder:text-slateText/30 hover:border-sand focus:border-terracotta focus:bg-off-white focus:shadow-[0_0_0_4px_rgba(184,88,65,0.08)]" />
     <button type="button" onClick={() => setShow((s) => !s)} aria-label={show ? 'Hide password' : 'Show password'} className="absolute right-4 top-1/2 -translate-y-1/2 text-slateText/35 transition-colors hover:text-forest">{show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button>

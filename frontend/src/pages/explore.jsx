@@ -44,7 +44,7 @@ const filtered = destinations.filter(d => {
 const types = ['All', 'Nature', 'Culture', 'Sightseeing', 'Sunset', 'Fishing', 'Hiking']
 
 return(
- <div className='min-h-screen bg-[#f8f6f0] text-forest font-sans'>
+ <div className='page-surface min-h-screen text-forest font-sans'>
   <section className='page-hero relative flex flex-col justify-center bg-forest text-off-white overflow-hidden pb-16 pt-24 sm:pt-28'>
    <div className='absolute inset-0 bg-cover bg-center bg-no-repeat' style={{backgroundImage: `url('${BackgroundImage}')`}} />
    <div className="absolute inset-0 bg-gradient-to-r from-forest/90 via-forest/85 to-forest/75" />
@@ -77,7 +77,7 @@ return(
      </div>
 
      <div className="flex items-center gap-2 w-full sm:w-auto justify-between">
-      <button onClick={() => setOnlyGems(!onlyGems)} className={`px-3 py-2.5 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all border ${ onlyGems ? 'bg-terracotta text-off-white border-terracotta' : 'bg-white text-slateText border-sand hover:border-forest/40' }`}>
+      <button onClick={() => setOnlyGems(!onlyGems)} className={`px-3 py-2.5 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all border ${ onlyGems ? 'bg-terracotta text-off-white border-terracotta' : 'content-panel text-slateText border-sand hover:border-forest/40' }`}>
        <Sparkles className="w-3.5 h-3.5" />
        <span>Hidden Gems</span>
       </button>
@@ -92,7 +92,7 @@ return(
        <span>+ Add Place Log</span>
       </button>
 
-      <div className="flex items-center bg-white border border-sand rounded-md p-1">
+      <div className="flex items-center content-panel border border-sand rounded-md p-1">
        <button onClick={() => setViewMode('grid')} className={`p-1.5 rounded-xs transition-colors ${viewMode === 'grid' ? 'bg-forest text-off-white' : 'text-slateText'}`} aria-label="Grid View">
         <Grid className="w-4 h-4" />
        </button>
@@ -109,7 +109,7 @@ return(
    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-sand pb-4">
     <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
      {types.map(t => (
-      <button key={t} onClick={() => setSelectedType(t)} className={`px-4 py-1.5 text-xs rounded-full font-medium transition-all ${selectedType === t ? 'bg-forest text-sand font-semibold shadow-xs' : 'bg-white text-slateText border border-sand hover:border-forest/40'}`}>{t}</button>
+      <button key={t} onClick={() => setSelectedType(t)} className={`px-4 py-1.5 text-xs rounded-full font-medium transition-all ${selectedType === t ? 'bg-forest text-sand font-semibold shadow-xs' : 'content-panel text-slateText border border-sand hover:border-forest/40'}`}>{t}</button>
       ))}
     </div>
     
@@ -119,7 +119,7 @@ return(
     </div>
    </div>
    
-   <div className="flex items-center justify-between text-xs text-slateText font-sans mb-6">
+   <div className="flex items-center justify-between border-l-2 border-terracotta text-xs text-slateText font-sans mb-6">
     <span>Showing <strong>{filtered.length}</strong> of {destinations.length} destinations</span>
     {wishlist.length > 0 && (
      <span className="text-terracotta font-semibold flex items-center gap-1"><Heart className="w-3.5 h-3.5 fill-terracotta" /> {wishlist.length} saved in wishlist</span>
@@ -127,7 +127,7 @@ return(
    </div>
 
    {filtered.length === 0 ? (
-    <div className='bg-white rounded-[3px] p-12 text-center border border-sand my-8'>
+    <div className='content-panel rounded-[3px] p-12 text-center border border-sand my-8'>
      <Compass className="w-10 h-10 text-slateText/30 mx-auto mb-3 animate-pulse" />
      <h3 className="font-serif text-lg font-bold text-forest">No destinations matched your criteria</h3>
      <p className="text-xs text-slateText mt-1 max-w-sm mx-auto">Try adjusting your search keywords, score filter, or category pills.</p>
@@ -177,14 +177,14 @@ return(
        )}
 
        return(
-        <motion.div key={dest.id} onClick={() => setPreviewDest(dest)} initial={{ opacity: 0, y: 18, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.4, delay: Math.min(filtered.indexOf(dest) * 0.05, 0.35) }} className="relative flex flex-col rounded-[3px] bg-off-white p-2.5 pb-0 shadow-[0_2px_3px_rgba(0,0,0,0.25),0_24px_40px_-14px_rgba(0,0,0,0.65)] hover:scale-[1.02] transition-transform duration-300 cursor-pointer group">
+        <motion.div key={dest.id} onClick={() => setPreviewDest(dest)} initial={{ opacity: 0, y: 18, scale: 0.98 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: Math.min(filtered.indexOf(dest) * 0.04, 0.3) }} className="interactive-card flex flex-col rounded-[3px] bg-off-white p-3 border border-sand shadow-[0_2px_3px_rgba(0,0,0,0.15), flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 cursor-pointer group">
 
          {dest.isGem && (
           <span aria-hidden="true" className="absolute -top-3 left-1/2 z-10 h-6 w-20 -translate-x-1/2 -rotate-3 bg-sand/85 shadow-xs"/>
          )}
 
          <div className='relative h-56 w-full overflow-hidden'>
-          <img src={dest.image} alt={dest.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <img src={dest.image} alt={dest.title} className="interactive-image h-24 w-24 rounded-xs object-cover"/>
           <span className="absolute left-2 top-2 rounded-sm bg-forest/80 px-2 py-1 text-xs font-medium text-sand backdrop-blur-sm">{dest.type}</span>
           <span className="absolute right-2 top-2 flex items-center gap-1 rounded-sm bg-off-white/90 px-2 py-1 text-xs font-medium text-forest"><ShieldCheck className="h-3.5 w-3.5 text-terracotta" />{dest.score}</span>
 
@@ -197,7 +197,7 @@ return(
          <p className="text-xs italic text-slateText/70">{dest.category}</p>
           <div className="mt-0.5 flex items-start justify-between gap-2">
            <h3 className="font-serif text-2xl leading-tight text-forest group-hover:text-terracotta transition-colors">{dest.title}</h3>
-           <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-terracotta" />
+           <ArrowUpRight className="interactive-arrow mt-1 h-5 w-5 shrink-0 text-terracotta" />
           </div>
           
           <div className="mt-2 flex items-center justify-between gap-2 text-xs text-slateText">
@@ -243,7 +243,7 @@ return(
      <div className="p-6 space-y-4 max-h-[55vh] overflow-y-auto font-sans text-forest">
       <p className="text-sm leading-relaxed">{previewDest.description}</p>
       
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-3 rounded-[3px] border border-sand text-xs">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 content-panel p-3 rounded-[3px] border border-sand text-xs">
       <div>
        <span className="text-[10px] text-slateText/70 uppercase block">Elevation</span>
        <strong className="text-forest text-sm font-serif">{previewDest.elevation} m</strong>

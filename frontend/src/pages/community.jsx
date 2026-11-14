@@ -205,7 +205,7 @@ const handleFormSubmit = (e) => {
 }
 
 return (
- <div className="min-h-screen bg-[#f8f6f0] text-forest font-sans">
+ <div className="page-surface min-h-screen text-forest font-sans">
  <section className="page-hero relative flex flex-col justify-center bg-forest text-off-white overflow-hidden pb-16 pt-24 sm:pt-28">
  <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${BackgroundImage}')` }} />
   <div className="absolute inset-0 bg-gradient-to-r from-forest/90 via-forest/85 to-forest/75" />
@@ -291,7 +291,7 @@ return (
         <p className="text-xs text-slateText flex items-center gap-1 font-sans">
         <MapPin className="w-3.5 h-3.5 text-terracotta shrink-0" />{post.location} • {post.elevation} m elevation</p>
 
-        <div className="grid grid-cols-2 gap-2 bg-white p-2.5 rounded-[3px] border border-sand text-xs font-sans mt-2">
+        <div className="grid grid-cols-2 gap-2 content-panel p-2.5 rounded-[3px] border border-sand text-xs font-sans mt-2">
          <div>
           <span className="text-[10px] text-slateText/70 uppercase block">Actual Spent</span>
           <strong className="text-terracotta font-serif font-bold">NPR {post.budgetSpent}</strong>
@@ -320,7 +320,7 @@ return (
      </div>
 
     <div className="pt-3 border-t border-sand/60 flex items-center justify-between text-xs font-sans">
-     <button onClick={() => handleUpvote(post.id)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border transition-all ${ isUpvoted ? 'bg-terracotta text-off-white border-terracotta font-semibold' : 'bg-white text-slateText border-sand hover:bg-sand/20' }`} >
+     <button onClick={() => handleUpvote(post.id)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border transition-all ${ isUpvoted ? 'bg-terracotta text-off-white border-terracotta font-semibold' : 'content-panel text-slateText border-sand hover:bg-sand/20' }`} >
      <ThumbsUp className="w-3.5 h-3.5" />
      <span>{isUpvoted ? 'Helpful Logged' : 'Found Helpful'} ({post.helpfulCount})</span>
     </button>
@@ -336,7 +336,7 @@ return (
 
   {activeMode === 'share' && (
    <div className="max-w-3xl mx-auto">
-    <div className="bg-white rounded-[3px] p-8 border border-sand shadow-[0_4px_20px_rgba(0,0,0,0.08)] space-y-6 relative">
+    <div className="content-panel rounded-[3px] p-8 border border-sand shadow-[0_4px_20px_rgba(0,0,0,0.08)] space-y-6 relative">
               
     <div className="border-b border-sand pb-4 flex items-center justify-between">
      <div>
