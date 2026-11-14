@@ -66,7 +66,7 @@ export default function Recommendation(){
   }
 
  return(
-  <div className="min-h-screen bg-[#f8f6f0] text-forest font-sans">
+  <div className="page-surface min-h-screen text-forest font-sans">
    <section className="page-hero relative flex flex-col justify-center bg-forest text-off-white overflow-hidden pb-16 pt-24 sm:pt-28">
     <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${BackgroundImage}')` }} />
     <div className="absolute inset-0 bg-gradient-to-r from-forest/90 via-forest/85 to-forest/75" />
@@ -94,7 +94,7 @@ export default function Recommendation(){
    </section>
 
    <main className='max-w-2xl mx-auto px-6 py-16'>
-    <div className="bg-white rounded-[3px] p-8 border border-sand shadow-[0_4px_20px_rgba(0,0,0,0.08)] relative overflow-hidden">
+    <div className="content-panel rounded-[3px] p-8 border border-sand shadow-[0_4px_20px_rgba(0,0,0,0.08)] relative overflow-hidden">
      {!recommended ? (
       <div className="space-y-6">
        <div className="flex items-center justify-between border-b border-sand pb-4">
@@ -108,7 +108,7 @@ export default function Recommendation(){
          
          <div className="space-y-3 pt-2">
           {QUIZ_QUESTIONS[currentStep].options.map((opt, idx) => (
-          <button key={idx} onClick={() => handleSelectOption(opt)} className="w-full text-left p-4 rounded-[3px] border border-sand bg-off-white hover:bg-forest hover:text-off-white transition-all text-xs font-medium font-sans flex items-center justify-between group">
+          <button key={idx} onClick={() => handleSelectOption(opt)} className="interactive-card w-full text-left p-4 rounded-[3px] border border-sand bg-off-white hover:bg-forest hover:text-off-white transition-all text-xs font-medium font-sans flex items-center justify-between group">
            <span>{opt.label}</span>
            <ArrowRight className="w-4 h-4 text-terracotta group-hover:text-sand transition-transform group-hover:translate-x-1" />
           </button>
@@ -124,7 +124,7 @@ export default function Recommendation(){
        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xs bg-sand/60 text-forest text-xs font-semibold font-sans"><Sparkles className="w-3.5 h-3.5 text-terracotta" /> Matched Destination
        </div>
        
-       <div className="relative flex flex-col rounded-[3px] bg-off-white p-3 border border-sand shadow-[0_2px_3px_rgba(0,0,0,0.25),0_24px_40px_-14px_rgba(0,0,0,0.65)] text-left">
+       <div className="interactive-card relative flex flex-col rounded-[3px] bg-off-white p-3 border border-sand shadow-[0_2px_3px_rgba(0,0,0,0.25),0_24px_40px_-14px_rgba(0,0,0,0.65)] text-left">
         <span aria-hidden="true" className="absolute -top-3 left-1/2 z-10 h-6 w-24 -translate-x-1/2 -rotate-2 bg-sand/90 shadow-xs" />
         
         <div className="relative h-64 w-full overflow-hidden">

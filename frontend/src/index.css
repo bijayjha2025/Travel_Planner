@@ -189,3 +189,38 @@ select:focus-visible {
   transform: translate(3px, -3px);
   color: #c96b4b;
 }
+
+.page-surface {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(24, 58, 55, 0.16), transparent 28rem),
+    radial-gradient(circle at 92% 38%, rgba(201, 107, 75, 0.14), transparent 26rem),
+    linear-gradient(180deg, #d4c6b0 0%, #eee4d3 38%, #d8c8b3 100%);
+  background-size: 140% 140%;
+  animation: surfaceDrift 18s ease-in-out infinite alternate;
+}
+
+.page-surface::before {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 72% 18%, rgba(232, 220, 200, 0.26), transparent 18rem),
+    radial-gradient(circle at 28% 78%, rgba(201, 107, 75, 0.08), transparent 22rem);
+  animation: ambientGlow 14s ease-in-out infinite alternate;
+}
+
+.page-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.content-panel {
+  background: linear-gradient(135deg, rgba(248, 246, 240, 0.9), rgba(232, 220, 200, 0.72));
+  box-shadow: 0 12px 30px -24px rgba(24, 58, 55, 0.65);
+  backdrop-filter: blur(8px);
+}

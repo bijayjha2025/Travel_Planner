@@ -73,7 +73,7 @@ const handleSavePlan = () => {
     new Set([ 'Permits & ID Documents', 'Refillable Water Bottle', 'First Aid Kit', 'Camera & Powerbank', ...selectedDestinations.flatMap(d => d.suggestedItems || [])]))
 
   return(
-   <div className='min-h-screen bg-[#f8f6f0] text-forest font-sans'>
+   <div className='page-surface min-h-screen bg-[#f8f6f0] text-forest font-sans'>
     <section className='page-hero relative flex flex-col justify-center bg-forest text-off-white overflow-hidden pb-16 pt-24 sm:pt-28'>
     <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${BackgroundImage}')` }} />
     <div className="absolute inset-0 bg-gradient-to-r from-forest/90 via-forest/85 to-forest/75" />
@@ -128,7 +128,7 @@ const handleSavePlan = () => {
     </section>
 
     <main className='max-w-[1500px] mx-auto px-6 lg:px-12 py-12'>
-     <div className='grid grid-cols-1 lg:grid-cols-12 gap-10'>
+     <div className='grid grid-cols-1 lg:grid-cols-12 gap-10 border-t border-terracotta/40 pt-8'>
      <div className="lg:col-span-5 space-y-8">
       <div className="bg-off-white rounded-[3px] p-6 border border-sand/80 shadow-[0_2px_4px_rgba(0,0,0,0.06)] space-y-6">
        <div className="border-b border-sand pb-3 flex items-center justify-between">
@@ -252,7 +252,7 @@ const handleSavePlan = () => {
         ].map(sec => { const isAct = activeSection === sec.id
             
           return (
-           <button key={sec.id} onClick={() => setActiveSection(sec.id)} className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${ isAct ? 'bg-forest text-sand shadow-xs font-semibold' : 'bg-white text-slateText border border-sand hover:border-forest/40'}`}>
+           <button key={sec.id} onClick={() => setActiveSection(sec.id)} className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${ isAct ? 'bg-forest text-sand shadow-xs font-semibold' : 'content-panel text-slateText border border-sand hover:border-forest/40'}`}>
             <span>{sec.label}</span>
             <span className="ml-1.5 text-[10px] text-terracotta font-deva opacity-80">{sec.deva}</span>
            </button>
@@ -306,7 +306,7 @@ const handleSavePlan = () => {
      )}
 
      {activeSection === 'map' && (
-       <div className="bg-white rounded-[3px] p-4 border border-sand shadow-xs space-y-3">
+       <div className="content-panel rounded-[3px] p-4 border border-sand shadow-xs space-y-3">
         <div className="px-2">
          <h3 className="font-serif text-xl text-forest font-bold">Interactive Route Explorer</h3>
          <p className="text-xs text-slateText mt-0.5 font-sans">View location pins and connecting travel paths in Koshi province.</p>
@@ -342,7 +342,7 @@ const handleSavePlan = () => {
         </div>
         </div>
         
-        <div className="bg-white rounded-[3px] p-6 border border-sand shadow-xs">
+        <div className="content-panel rounded-[3px] p-6 border border-sand shadow-xs">
          <h3 className="font-serif text-lg text-forest font-bold mb-1">Estimated Budget Breakdown</h3>
          <p className="text-xs text-slateText mb-4 font-sans">Based on {days} days for {travelers} traveler(s). Total: <strong className="text-terracotta">NPR {totalEstBudget.toLocaleString()}</strong></p>
 
@@ -363,7 +363,7 @@ const handleSavePlan = () => {
         )}
         
         {activeSection === 'packing' && (
-        <div className="bg-white rounded-[3px] p-6 border border-sand shadow-xs space-y-4">
+        <div className="content-panel rounded-[3px] p-6 border border-sand shadow-xs space-y-4">
          <div className="border-b border-sand pb-3">
           <h3 className="font-serif text-xl text-forest font-bold">Curated Packing Checklist</h3>
           <p className="text-xs text-slateText mt-0.5 font-sans">Recommended items for your selected Koshi destinations.</p>
@@ -376,7 +376,7 @@ const handleSavePlan = () => {
           
           return (
           <div key={item} onClick={() => setCheckedItems({ ...checkedItems, [item]: !isChecked })} className={`p-3 rounded-[3px] border cursor-pointer transition-all flex items-center gap-3 ${ isChecked ? 'bg-sand/30 border-forest/40 text-forest' : 'bg-off-white border-sand text-slateText'}`}>
-           <div className={`w-4 h-4 rounded-xs flex items-center justify-center text-xs ${ isChecked ? 'bg-forest text-off-white' : 'border border-sand bg-white'}`}>
+           <div className={`w-4 h-4 rounded-xs flex items-center justify-center text-xs ${ isChecked ? 'bg-forest text-off-white' : 'border border-sand bg-[#f5efe2]'}`}>
             {isChecked && '✓'}
            </div>
            
