@@ -43,8 +43,8 @@ const PasswordField = ({ id, label, value, onChange, autoComplete, placeholder }
    <div className="relative">
     <Lock className="pointer-events-none absolute left-4 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-sand/45 transition-colors group-focus-within:text-sand" />
     
-    <input id={id} type={show ? 'text' : 'password'} required value={value} onChange={onChange} autoComplete={autoComplete} placeholder={placeholder} minLength={8} className="w-full rounded-2xl border border-sand/90 bg-off-white/70 py-3.5 pl-11 pr-12 text-sm text-forest outline-none backdrop-blur-sm transition-all placeholder:text-slateText/30 hover:border-sand focus:border-terracotta focus:bg-off-white focus:shadow-[0_0_0_4px_rgba(184,88,65,0.08)]" />
-    <button type="button" onClick={() => setShow((s) => !s)} aria-label={show ? 'Hide password' : 'Show password'} className="absolute right-4 top-1/2 -translate-y-1/2 text-slateText/35 transition-colors hover:text-forest">{show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button>
+    <input id={id} type={show ? 'text' : 'password'} required value={value} onChange={onChange} autoComplete={autoComplete} placeholder={placeholder} minLength={8} className="auth-input w-full rounded-2xl py-3.5 pl-11 pr-12 text-sm text-off-white outline-none backdrop-blur-sm transition-all placeholder:text-sand/45" />
+    <button type="button" onClick={() => setShow((s) => !s)} aria-label={show ? 'Hide password' : 'Show password'} className="absolute right-4 top-1/2 -translate-y-1/2 text-sand/45 transition-colors hover:text-sand">{show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button>
    </div>
 
    {value.length > 0 && (
@@ -52,7 +52,7 @@ const PasswordField = ({ id, label, value, onChange, autoComplete, placeholder }
      <div className="flex flex-1 gap-1">
       {[1, 2, 3, 4].map((level) => <span key={level} className={`h-1 flex-1 rounded-full transition-colors ${level <= strength ? strength < 2 ? 'bg-terracotta' : strength < 4 ? 'bg-sand' : 'bg-forest' : 'bg-slateText/10'}`} />)}
      </div>
-     <span className="text-[9px] uppercase tracking-[0.14em] text-slateText/40">{strength < 2 ? 'keep going' : strength < 4 ? 'getting there' : 'solid choice'}</span>
+     <span className="text-[9px] uppercase tracking-[0.14em] text-sand/60">{strength < 2 ? 'keep going' : strength < 4 ? 'getting there' : 'solid choice'}</span>
     </motion.div>
    )}
   </div>
@@ -135,10 +135,10 @@ function AuthPage() {
    <main onPointerMove={(event) => {
     if(event.pointerType !== 'touch' && !reduce) setPointer({x:(event.clientX / window.innerWidth - 0.5) * 2, y:(event.clientY / window.innerHeight - 0.5) * 2})
    }}
-    className="relative min-h-screen overflow-hidden bg-forest font-sans text-slateText lg:grid lg:grid-cols-[1.08fr_0.92fr]">
+    className="relative min-h-screen overflow-hidden bg-[#102b29] font-sans text-slateText lg:grid lg:grid-cols-[1.08fr_0.92fr]">
      <motion.div className="absolute -inset-6 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${BackgroundImage}')`, x: pointer.x * -7, y: pointer.y * -7 }} />
-     <div className="absolute inset-0 bg-forest/40" />
-     <div className="absolute inset-0 bg-gradient-to-t from-forest/85 via-transparent to-forest/45" />
+     <div className="absolute inset-0 bg-forest/55" />
+     <div className="absolute inset-0 bg-gradient-to-br from-forest/85 via-forest/45 to-[#102b29]/95" />
 
      <motion.div style={{x: pointer.x * 18, y: pointer.y * 12}} className="pointer-events-none absolute right-0 top-1/2 hidden h-[760px] w-[760px] -translate-y-1/2 translate-x-1/4 rounded-full bg-sand/20 blur-[130px] lg:block" />
       <section className="relative z-10 flex min-h-[620px] overflow-hidden lg:min-h-screen">
@@ -190,28 +190,28 @@ function AuthPage() {
      
      <section className="relative z-10 flex items-center justify-center px-5 py-12 sm:px-8 lg:min-h-screen lg:px-12">
       
-      <motion.div style={{ rotateX: pointer.y * -1.2, rotateY: pointer.x * 1.2 }} initial={reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}className="relative w-full max-w-md overflow-hidden rounded-[2.25rem] border border-white/50 bg-[#8d9aa8] p-6 shadow-[0_40px_120px_rgba(8,24,18,0.45)] backdrop-blur-2xl sm:p-8 lg:max-w-[430px] lg:p-9">
+      <motion.div style={{ rotateX: pointer.y * -1.2, rotateY: pointer.x * 1.2 }} initial={reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}className="relative w-full max-w-md overflow-hidden rounded-[2.25rem] border border-sand/30 bg-gradient-to-br from-[#244f49]/95 via-[#183a37]/95 to-[#102b29]/95 p-6 text-off-white shadow-[0_40px_120px_rgba(8,24,18,0.45)] backdrop-blur-2xl sm:p-8 lg:max-w-[430px] lg:p-9">
         
-       <div className="pointer-events-none absolute inset-0 rounded-[2.25rem] bg-gradient-to-br from-off-white/25 via-transparent to-sand/10" />
+       <div className="pointer-events-none absolute inset-0 rounded-[2.25rem] bg-gradient-to-br from-sand/10 via-transparent to-terracota/10" />
        <div className="relative w-full">
        <div className="mb-8 flex items-end justify-between">
        <div>
         <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.25em] text-terracotta">Koshi / your travel desk</p>
-        <p className="text-xs text-slateText/45">Everything worth remembering, in one place</p>
+        <p className="text-xs text-sand/70">Everything worth remembering, in one place</p>
        </div>
        
-       <div className="hidden items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-slateText/40 sm:flex">
+       <div className="hidden items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-sand/65 sm:flex">
         <span className="h-1.5 w-1.5 rounded-full bg-terracotta" />Just for you
        </div>
       </div>
 
-      <div className="mb-6 h-1 overflow-hidden rounded-full bg-slateText/10">
+      <div className="mb-6 h-1 overflow-hidden rounded-full bg-off-white/15">
        <motion.div className="h-full rounded-full bg-terracotta" animate={{ width: `${formProgress}%` }} transition={{ type: 'spring', stiffness: 220, damping: 24 }} />
       </div>
       
-      <div className="relative mb-8 grid grid-cols-2 border-b border-slateText/15">
+      <div className="relative mb-8 grid grid-cols-2 border-b border-off-white/15">
        {[ { key: 'signin', label: 'Sign in' }, { key: 'signup', label: 'Create account' },].map((tab) => (
-       <button key={tab.key} type="button" onClick={() => switchMode(tab.key)} className={`relative pb-3 text-left text-xs font-semibold uppercase tracking-[0.15em] transition-colors ${ mode === tab.key ? 'text-forest' : 'text-slateText/40 hover:text-slateText/70'}`}>
+       <button key={tab.key} type="button" onClick={() => switchMode(tab.key)} className={`relative pb-3 text-left text-xs font-semibold uppercase tracking-[0.15em] transition-colors ${ mode === tab.key ? 'text-sand' : 'text-sand/40 hover:text-sand/70'}`}>
         {tab.label}
         
         {mode === tab.key && (
@@ -223,26 +223,26 @@ function AuthPage() {
      <AnimatePresence mode="wait">
       <motion.div key={mode} initial={reduce ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }} transition={{ duration: 0.28 }}>
       <div className="mb-7">
-       <h2 className="font-serif text-4xl tracking-[-0.02em] text-forest">{mode === 'signin' ? 'Good to have you back.' : 'Let \'s, make a plan.'}</h2>
-       <p className="mt-2 max-w-sm text-sm leading-6 text-slateText/60">{mode === 'signin' ? 'Your saved places and unfinished plans are right where you left them.' : 'Save the places calling your name, then turn one of them into a real trip.'}</p>
+       <h2 className="font-serif text-4xl tracking-[-0.02em] text-off-white">{mode === 'signin' ? 'Good to have you back.' : 'Let \'s, make a plan.'}</h2>
+       <p className="mt-2 max-w-sm text-sm leading-6 text-sand/75">{mode === 'signin' ? 'Your saved places and unfinished plans are right where you left them.' : 'Save the places calling your name, then turn one of them into a real trip.'}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
        {mode === 'signup' && (
        <div className="group">
-        <label htmlFor="name" className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-slateText/65">Full name</label>
+        <label htmlFor="name" className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-sand/80">Full name</label>
         <div className="relative">
-        <User className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slateText/35 transition-colors group-focus-within:text-terracotta" />
-        <input id="name" type="text" required value={form.name} onChange={update('name')} autoComplete="name" placeholder="Your Name" className="w-full mountain-input py-3 pl-11 pr-4 text-sm text-forest outline-none transition-all placeholder:text-slateText/30" />
+        <User className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-sand/45 transition-colors group-focus-within:text-sand" />
+        <input id="name" type="text" required value={form.name} onChange={update('name')} autoComplete="name" placeholder="Your Name" className="auth-input w-full rounded-2xl py-3 pl-11 pr-4 text-sm text-off-white outline-none transition-all placeholder:text-sand/45" />
        </div>
       </div>
      )}
 
     <div className="group">
-     <label htmlFor="email" className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-slateText/65">Email</label>
+     <label htmlFor="email" className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-sand/80">Email</label>
      <div className="relative">
-      <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slateText/35 transition-colors group-focus-within:text-terracotta" />
-      <input id="email" type="email" required value={form.email} onChange={update('email')} autoComplete="email" placeholder="youremail@gmail.com" className="w-full mountain-input py-3 pl-11 pr-4 text-sm text-forest outline-none transition-all placeholder:text-slateText/30" />
+      <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-sand/45 transition-colors group-focus-within:text-sand" />
+      <input id="email" type="email" required value={form.email} onChange={update('email')} autoComplete="email" placeholder="youremail@gmail.com" className="auth-input w-full rounded-2xl py-3 pl-11 pr-4 text-sm text-off-white outline-none transition-all placeholder:text-sand/45" />
       </div>
      </div>
 
@@ -256,14 +256,14 @@ function AuthPage() {
 
      {mode === 'signin' ? (
       <div className="flex items-center justify-between text-xs">
-       <label className="flex items-center gap-2 text-slateText/65">
+       <label className="flex items-center gap-2 text-sand/75">
        <input type="checkbox" className="h-4 w-4 rounded border-sand accent-forest" />Remember me</label>
-       <a href="/forgot-password" className="font-semibold text-forest transition-colors hover:text-terracotta">Forgot password?</a>
+       <a href="/forgot-password" className="font-semibold text-forest transition-colors hover:text-off-white">Forgot password?</a>
       </div>
       ) : (
-       <label className="flex items-start gap-2.5 text-xs leading-5 text-slateText/65">
+       <label className="flex items-start gap-2.5 text-xs leading-5 text-sand/75">
        <input type="checkbox" required checked={form.agree} onChange={update('agree')} className="mt-0.5 h-4 w-4 shrink-0 rounded border-sand accent-forest" />
-        <span>I agree to the{' '}<a href="/terms" className="font-semibold text-forest hover:text-terracotta">Terms</a>{' '}and{' '}<a href="/privacy" className="font-semibold text-forest hover:text-terracotta">Privacy Policy</a>.</span>
+        <span>I agree to the{' '}<a href="/terms" className="font-semibold text-sand hover:text-off-white">Terms</a>{' '}and{' '}<a href="/privacy" className="font-semibold text-sand hover:text-off-white">Privacy Policy</a>.</span>
        </label>
       )}
 
@@ -276,27 +276,27 @@ function AuthPage() {
       </motion.button>
       </form>
 
-      <div className="my-7 flex items-center gap-3 text-[9px] font-semibold uppercase tracking-[0.2em] text-slateText/35">
-       <span className="h-px flex-1 bg-slateText/10" />or continue with<span className="h-px flex-1 bg-slateText/10" />
+      <div className="my-7 flex items-center gap-3 text-[9px] font-semibold uppercase tracking-[0.2em] text-sand/50">
+       <span className="h-px flex-1 bg-sand/20" />or continue with<span className="h-px flex-1 bg-sand/20" />
       </div>
 
-      <button type="button" className="group flex w-full items-center justify-center gap-3 rounded-2xl border border-slateText/10 bg-off-white/35 py-3.5 text-sm font-medium text-slateText transition-all hover:border-forest/20 hover:bg-off-white/60">
+      <button type="button" className="group flex w-full items-center justify-center gap-3 rounded-2xl border border-sand/25 bg-off-white/10 py-3.5 text-sm font-medium text-sand transition-all hover:border-sand/50 hover:bg-off-white/20">
         <GoogleIcon className="h-4 w-4" />
         <span>Google</span>
-        <ArrowUpRight className="h-3.5 w-3.5 text-slateText/30 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <ArrowUpRight className="h-3.5 w-3.5 text-sand/50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </button>
 
-      <p className="mt-7 text-center text-xs text-slateText/55">
+      <p className="mt-7 text-center text-xs text-sand/65">
        {mode === 'signin' ?
        (
-        <>New here?{' '}<button type="button" onClick={() => switchMode('signup')} className="font-semibold text-forest hover:text-terracotta">Create an account</button></>
+        <>New here?{' '}<button type="button" onClick={() => switchMode('signup')} className="font-semibold text-sand hover:text-off-white">Create an account</button></>
 
        ) : (
-        <>Already have an account?{' '}<button type="button" onClick={() => switchMode('signin')} className="font-semibold text-forest hover:text-terracotta">Sign in</button></>
+        <>Already have an account?{' '}<button type="button" onClick={() => switchMode('signin')} className="font-semibold text-sand hover:text-off-white">Sign in</button></>
        )}
       </p>
 
-      <div className="mt-9 flex items-center justify-center gap-2 text-[9px] uppercase tracking-[0.18em] text-slateText/40">
+      <div className="mt-9 flex items-center justify-center gap-2 text-[9px] uppercase tracking-[0.18em] text-sand/50">
        <span className="h-1 w-1 rounded-full bg-terracotta/70" />Your plans. Your pace. Your stories.<span className="h-1 w-1 rounded-full bg-terracotta/70" />
       </div>
       </motion.div>
