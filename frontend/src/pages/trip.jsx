@@ -46,7 +46,7 @@ export default function Trip(){
  const tripDestinations = destinations.filter(dest => selectedTrip.destIds.includes(dest.id))
  
  return(
-  <div className='min-h-screen bg-[#f8f6f0] text-forest font-sans'>
+  <div className='page-surface min-h-screen text-forest font-sans'>
   <section className="page-hero relative flex flex-col justify-center bg-forest text-off-white overflow-hidden pb-16 sm:pt-28 pt-24">
     
    <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${BackgroundImage}')` }} />
@@ -81,8 +81,8 @@ export default function Trip(){
    {FEATURED_TRIPS.map(trip => {
     const isSel = selectedTrip.id === trip.id
     return(
-      <div key={trip.id} onClick={() => setSelectedTrip(trip)} className={`rounded-[3px] p-6 cursor-pointer transition-all flex flex-col justify-between space-y-4 border ${
-        isSel ? 'bg-off-white border-terracotta shadow-[0_4px_16px_rgba(0,0,0,0.15)] ring-2 ring-terracotta/40' : 'bg-white border-sand hover:border-forest/90'}`}>
+      <div key={trip.id} onClick={() => setSelectedTrip(trip)} className={`interactive-card rounded-[3px] p-6 cursor-pointer transition-all flex flex-col justify-between space-y-4 border ${
+        isSel ? 'bg-off-white border-terracotta shadow-[0_4px_16px_rgba(0,0,0,0.15)] ring-2 ring-terracotta/40' : 'content-panel border-sand hover:border-forest/90'}`}>
 
        <div>
         <div className='flex items-center justify-between text-xs text-slateText font-sans mb-2'>
@@ -106,7 +106,7 @@ export default function Trip(){
 
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
  <div className="lg:col-span-7 space-y-6">
- <div className="bg-white rounded-[3px] p-6 border border-sand shadow-xs space-y-6">
+  <div className="content-panel rounded-[3px] p-6 border border-sand shadow-xs space-y-6">
  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sand pb-4">
   <div>
    <h2 className="font-serif text-2xl font-bold text-forest">{selectedTrip.title}</h2>
@@ -133,7 +133,7 @@ export default function Trip(){
     
    <div className="space-y-4">
    {tripDestinations.map((dest, idx) => (
-    <div key={dest.id} className="bg-off-white rounded-[3px] p-4 border border-sand shadow-xs flex gap-4 items-start">
+    <div key={dest.id} className=" interactive-card bg-off-white rounded-[3px] p-4 border border-sand shadow-xs flex gap-4 items-start">
      <img src={dest.image} alt={dest.title} className="w-24 h-24 rounded-xs object-cover shrink-0" />
                       
     <div className="space-y-1 flex-1 font-sans">
@@ -154,7 +154,7 @@ export default function Trip(){
   </div>
 
   <div className="lg:col-span-5 space-y-6">
-   <div className="bg-white rounded-[3px] p-4 border border-sand shadow-xs space-y-3">
+   <div className="content-panel rounded-[3px] p-4 border border-sand shadow-xs space-y-3">
     <h3 className="font-serif text-lg text-forest font-bold px-2">Itinerary Route Map</h3>
     <InteractiveMap destinations={destinations} selectedIds={selectedTrip.destIds} height="460px" />
    </div>

@@ -46,7 +46,7 @@ export const Navbar = ({ overHero = true }) => {
   
   return(
     <>
-     <nav className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ${ solid ? 'border-sand bg-off-white-90 backdrop-blur-md shadow-[0_6px_20px_-12px_rgba(0,0,0,0.35)]' : 'border-transparent bg-transparent' }`} >
+     <nav className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ${ solid ? 'border-sand/80 bg-off-white-95 backdrop-blur-md shadow-[0_6px_20px_-12px_rgba(24,58,55,0.45)]' : 'border-off-white/15 bg-forest/80 backdrop-blur-md shadow-[0_6px_24px_-16px_rgba(0,0,0,0.7)]' }`} >
       <div className='max-w-7xl mx-auto px-6 h-20 flex items-center justify-between'>
 
        <Link to='/' className={`flex items-center gap-2.5 transition-colors duration-300 ${solid ? 'text-forest' : 'text-off-white'}`}>
@@ -65,11 +65,19 @@ export const Navbar = ({ overHero = true }) => {
        </div>
 
       <div className='hidden md:flex items-center gap-5'>
-       <Link to='/login' className={`text-sm font-medium transition-colors ${ solid ? 'text-slateText hover:text-forest' : 'text-off-white/85 hover:text-off-white'}`}>Sign In</Link>
-       <Link to='/planner' className={`rounded-md px-5 py-2.5 text-sm font-medium transition-colors ${ solid ? 'bg-forest text-off-white hover:bg-forest-light' : 'bg-sand text-forest hover:bg-off-white'}`}>Plan My Journey</Link>
+       <Link to='/login' className={`group relative py-2 text-sm font-medium transition-colors ${ solid ? 'text-slateText hover:text-forest' : 'text-off-white/90 hover:text-off-white'}`}>Sign In
+        <svg aria-hidden="true" viewBox="0 0 100 6" preserveAspectRatio="none" className="absolute -bottom-0.5 left-0 h-[6px] w-full origin-left scale-x-0 text-terracotta transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100">
+         <path d="M0 3 Q 12.5 0, 25 3 T 50 3 T 75 3 T 100 3" fill="none" stroke="currentColor" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+        </svg>
+        </Link>
+       <Link to='/planner' className={`block rounded-md px-5 py-2.5 text-sm font-medium transition-colors ${ solid ? 'bg-forest text-off-white hover:bg-forest-light' : 'bg-sand text-forest hover:bg-off-white'}`}>Plan My Journey
+       <svg aria-hidden="true" viewBox="0 0 100 6" preserveAspectRatio="none" className="pointer-events-none absolute -bottom-2 left-1/2 h-[6px] w-[82%] -translate-x-1/2 origin-left scale-x-0 text-terracotta transition-transform duration-300 ease-out group-hover:scale-x-100">
+         <path d="M0 3 Q 12.5 0, 25 3 T 50 3 T 75 3 T 100 3" fill="none" stroke="currentColor" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+        </svg>
+        </Link>
       </div>
      
-      <button onClick={() => setIsOpen(!isOpen)} className="z-50 -mr-2 rounded-lg p-2 text-forest transition-colors hover:bg-sand/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest md:hidden" aria-label={isOpen ? 'Close menu' : 'Open menu'}aria-expanded={isOpen} aria-controls="mobile-menu" >
+       <button onClick={() => setIsOpen(!isOpen)} className={`z-50 -mr-2 rounded-lg p-2 transition-colors hover:bg-sand/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest md:hidden ${solid ? 'text-forest' : 'text-off-white'}`} aria-label={isOpen ? 'Close menu' : 'Open menu'}aria-expanded={isOpen} aria-controls="mobile-menu" >
        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
      </div>

@@ -3,7 +3,7 @@ import Footer from '../components/layout/footer'
 
 export default function Home() {
   return (
-    <main>
+    <main className='bg-off-white'>
       <HeroSection />
       <Footer />
     </main>
