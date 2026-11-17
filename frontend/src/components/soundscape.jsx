@@ -72,7 +72,11 @@ class AmbientAudioSynthesizer {
       this.gainNode.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.5)
       setTimeout(() => {
         if (this.windNode) {
-          try { this.windNode.stop() } catch {}
+          try {
+            this.windNode.stop()
+          } catch (error) {
+            console.error('Unable to stop the ambient wind soundscape.', error)
+          }
           this.windNode = null
         }
         this.isPlaying = false

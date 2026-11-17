@@ -4,7 +4,7 @@ import Planner from './pages/planner.jsx'
 import Authpage from './pages/Authpage.jsx'
 
 import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 import Community from './pages/community.jsx'
 import Explore from './pages/explore.jsx'

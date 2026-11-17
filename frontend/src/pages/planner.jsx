@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { useSearchParams, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { destinations } from '../data/destinations'
 import BackgroundImage from '../assets/BackgroundImage.png'
 import { Mountain, Calendar, Users, Compass, Check, ShieldCheck, CheckCircle2, MapPin, Bookmark, Share2 } from 'lucide-react'
@@ -37,12 +37,6 @@ export default function Planner() {
   const [saved, setSaved] = useState(false)
   const [userNotes, setUserNotes] = useState({})
   const [checkedItems, setCheckedItems] = useState({})
-
-  useEffect(() => {
-   if (initialDestId && !selectedIds.includes(initialDestId)){
-    setSelectedIds(prev => [...prev, initialDestId])
-   }
-  }, [initialDestId])
 
 const selectedDestinations = destinations.filter(d => selectedIds.includes(d.id))
 

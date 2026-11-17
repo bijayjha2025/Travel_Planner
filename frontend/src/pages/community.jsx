@@ -80,24 +80,6 @@ export default function Community() {
   }
  })
 
- useEffect(() => {
-  const checkUser = () => {
-    try{
-     const saved = localStorage.getItem('koshi_user')
-     const parsed = saved ? JSON.parse(saved) : null
-     setCurrentUser(parsed)
-
-     if(parsed && !formData.authorName){
-      setFormData(prev => ({...prev, authorName: parsed.name }))
-     }
-    }catch{
-      setCurrentUser(null)
-    }
-  }
-  window.addEventListener('koshi_auth_change', checkUser)
-  return () => window.removeEventListener('koshi_auth_change', checkUser)
-}, [])
-
 const [posts, setPosts] = useState(() => {
   try{
     const saved = localStorage.getItem('koshi_community_posts')
@@ -133,6 +115,24 @@ const [formData, setFormData] = useState({
 })
 
 const [formSubmitted, setFormSubmitted] = useState(false)
+
+useEffect(() => {
+  const checkUser = () => {
+    try{
+     const saved = localStorage.getItem('koshi_user')
+     const parsed = saved ? JSON.parse(saved) : null
+     setCurrentUser(parsed)
+
+     if(parsed){
+      setFormData(prev => prev.authorName ? prev : {...prev, authorName: parsed.name })
+     }
+    }catch{
+      setCurrentUser(null)
+    }
+  }
+  window.addEventListener('koshi_auth_change', checkUser)
+  return () => window.removeEventListener('koshi_auth_change', checkUser)
+}, [])
 
 useEffect(() => {
   localStorage.setItem('koshi_community_posts', JSON.stringify(posts))

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { MapPin, ArrowUpRight, ShieldCheck, Mountain, ChevronRight, Sparkles } from 'lucide-react'
+import { MapPin, ArrowUpRight, ChevronRight, Sparkles } from 'lucide-react'
 import { destinations } from '../data/destinations.js'
 import Footer from '../components/layout/footer.jsx'
 import BackgroundImage from '../assets/BackgroundImage.png'
