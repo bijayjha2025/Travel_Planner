@@ -13,10 +13,10 @@ const exploreLinks = [
 ]
 
 const companyLinks = [
-  { label: 'About Us', href: '/#our-story' },
-  { label: 'How It Works', href: '/#how-it-works' },
-  { label: 'Responsible Travel', href: '/#responsible-travel' },
-  { label: 'Contact Us', href: '/#contact' },
+  { label: 'About Us', href: '/about' },
+  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'Responsible Travel', href: '/responsible-travel' },
+  { label: 'Contact Us', href: '/contact' },
 ]
 
 const socials = [

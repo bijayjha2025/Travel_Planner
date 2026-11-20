@@ -11,6 +11,10 @@ import Explore from './pages/explore.jsx'
 import Recommendation from './pages/recommendation.jsx'
 import Trip from './pages/trip.jsx'
 import Destination from './pages/destination.jsx'
+import About from './pages/about.jsx'
+import HowItWorks from './pages/how-it-works.jsx'
+import Contact from './pages/contact.jsx'
+import ResponsibleTravel from './pages/responsible-travel.jsx'
 
 
 function ScrollToTop() {
@@ -40,6 +44,10 @@ export default function App() {
        <Route path='/recommendation' element={<Recommendation />} />
        <Route path='/trip' element={<Trip />} />
        <Route path='/destination' element={<Destination />} />
+       <Route path='/about' element={<About />} />
+       <Route path='/how-it-works' element={<HowItWorks />} />
+       <Route path='/contact' element={<Contact />} />
+       <Route path='/responsible-travel' element={<ResponsibleTravel />} />
        <Route path='/planner' element={<Planner />} />
        <Route path='/login' element={<Authpage />} />
        <Route path='/auth' element={<Authpage />} />
